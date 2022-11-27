@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from "react";
+import Axios from 'axios'
 
 function App() {
 
@@ -9,6 +10,18 @@ function App() {
     const [country, setCountry] = useState("")
     const [position, setPosition] = useState("")
     const [wage, setWage] = useState("")
+
+    const  addEmployee = () => {
+        Axios.post('http://localhost:3000/create', {
+            name: name, 
+            age: age, 
+            country: country, 
+            position: position, 
+            wage: wage}).then(()=>{
+                console.log("success")
+            }
+        )
+    }
 
     const displayInfo = () => {
         console.log(name + age + country + position + wage)
@@ -48,7 +61,7 @@ function App() {
                 }}
             /> 
 
-            <button onClick={displayInfo}>Add Employee</button>
+            <button onClick={addEmployee}>Add Employee</button>
         </div>
     </div>
     );
