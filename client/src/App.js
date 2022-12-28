@@ -113,9 +113,10 @@ function App() {
             }}
           />
           <button onClick={addEmployee}>Add Employee</button>
+          <button onClick={getEmployees}>Show Employees</button>
         </div>
         <div className="employees">
-          <button onClick={getEmployees}>Show Employees</button>
+          
   
           {employeeList.map((val, key) => {
             return (
@@ -130,7 +131,7 @@ function App() {
                 <div>
                   <input
                     type="text"
-                    placeholder="2000..."
+                    placeholder="New Wage..."
                     onChange={(event) => {
                       setNewWage(event.target.value);
                     }}
