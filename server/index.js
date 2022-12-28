@@ -15,7 +15,6 @@ const db = mysql.createConnection({
 
 
 app.post('/create', (req, res) =>{
-    console.log("hi2");
     const name = req.body.name
     const age = req.body.age
     const country = req.body.country
