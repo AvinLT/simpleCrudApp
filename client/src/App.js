@@ -1,10 +1,8 @@
-import './App.css';
+import "./App.css";
 import { useState } from "react";
-import Axios from 'axios'
+import Axios from "axios";
 
 function App() {
-
-
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [country, setCountry] = useState("");
@@ -16,40 +14,41 @@ function App() {
 
   //add employee to database
   const addEmployee = () => {
-      Axios.post("http://localhost:3001/create", {
-        name: name,
-        age: age,
-        country: country,
-        position: position,
-        wage: wage,
-      }).then(() => { //to instantly change without clicking show button
-        setEmployeeList([
-          ...employeeList,
-          {
-            name: name,
-            age: age,
-            country: country,
-            position: position,
-            wage: wage,
-          },
-        ]);
-      });
-    };
+    Axios.post("http://localhost:3001/create", {
+      name: name,
+      age: age,
+      country: country,
+      position: position,
+      wage: wage,
+    }).then(() => {
+      //to instantly change without clicking show button
+      setEmployeeList([
+        ...employeeList,
+        {
+          name: name,
+          age: age,
+          country: country,
+          position: position,
+          wage: wage,
+        },
+      ]);
+    });
+  };
 
-  return //all employees
+  //all employees
   const getEmployees = () => {
-      Axios.get("http://localhost:3001/employees").then((response) => {
-        setEmployeeList(response.data);
-      });
-    };
-  
+    Axios.get("http://localhost:3001/employees").then((response) => {
+      setEmployeeList(response.data);
+    });
+  };
+
   //change the wage of an employee
   const updateEmployeeWage = (id) => {
-  Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
+    Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
       (response) => {
-      setEmployeeList(
+        setEmployeeList(
           employeeList.map((val) => {
-          return val.id == id
+            return val.id == id
               ? {
                   id: val.id,
                   name: val.name,
@@ -57,27 +56,27 @@ function App() {
                   age: val.age,
                   position: val.position,
                   wage: newWage,
-              }
+                }
               : val;
           })
-      );
+        );
       }
-  );
+    );
   };
 
   //remove employee
   const deleteEmployee = (id) => {
-      Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
-        setEmployeeList(
-          employeeList.filter((val) => {
-            return val.id != id;
-          })
-        );
-      });
-    };
+    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+      setEmployeeList(
+        employeeList.filter((val) => {
+          return val.id != id;
+        })
+      );
+    });
+  };
 
   return (
-      <div className="App">
+    <div className="App">
       <div className="information">
         <label>Name:</label>
         <input
@@ -118,7 +117,6 @@ function App() {
         <button onClick={getEmployees}>Show Employees</button>
       </div>
       <div className="employees">
-
         {employeeList.map((val, key) => {
           return (
             <div className="employee">
@@ -163,4 +161,3 @@ function App() {
 }
 
 export default App;
- 
